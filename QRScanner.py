@@ -6,13 +6,14 @@ IMAGEPATH = 'C:/Users/Afiq/Desktop/code.png'
 FORMAT = 'utf-8'
 COLOR = (0, 0, 255)
 FREQUENCY = 2700
-DURATION  = 50
+DURATION = 50
+
 
 class QrScanner:
     def __init__(self, IMAGEPATH):
-       self.image = cv2.imread(IMAGEPATH)
-       self.barcodes = pyzbar.decode(self.image)
-       self.get()
+        self.image = cv2.imread(IMAGEPATH)
+        self.barcodes = pyzbar.decode(self.image)
+        self.get()
 
     def get(self):
         if self.barcodes:
@@ -21,15 +22,16 @@ class QrScanner:
 
             for barcode in self.barcodes:
                 (x, y, w, h) = barcode.rect
-                cv2.rectangle(self.image, (x, y), (x + w, y + h), COLOR, 5, cv2.LINE_AA)
+                cv2.rectangle(self.image, (x, y), (x + w, y + h), COLOR, 5,
+                              cv2.LINE_AA)
 
                 barcodeData = barcode.data.decode(FORMAT)
                 barcodeType = barcode.type
 
-                print(f"[STATUS] Success!")
-                print(f"[ INFO ] Type: {barcodeType}")
-                print(f"[ INFO ] Data: {barcodeData}")
-                cv2.imshow("QR Reader", self.image)
+                print(f'[STATUS] Success!')
+                print(f'[ INFO ] Type: {barcodeType}')
+                print(f'[ INFO ] Data: {barcodeData}')
+                cv2.imshow('QR Reader', self.image)
                 cv2.waitKey(0)
 
 
